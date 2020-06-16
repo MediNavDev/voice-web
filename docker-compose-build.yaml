@@ -23,7 +23,9 @@ services:
     volumes:
       - ./s3_data:/data
   web:
-    image: voice-web_web:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     container_name: web
     links:
       - db

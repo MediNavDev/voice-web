@@ -8,6 +8,7 @@ web/dist/
 web/index.html
 server/js/
 server/upload/
+server/node_modules
 xcuserdata/
 .ignore
 .ignored_files/
@@ -26,3 +27,12 @@ nubis/builder/artifacts/*
 
 # WebStorm
 .idea/
+
+
+server/datayarn.lock
+server/data/
+package-lock.json
+android/
+yarn.lock
+voiceweb_mysql_data/
+s3_data/
