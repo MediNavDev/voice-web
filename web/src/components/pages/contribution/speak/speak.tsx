@@ -12,6 +12,7 @@ import { Locale } from '../../../../stores/locale';
 import { Notifications } from '../../../../stores/notifications';
 import { Sentences } from '../../../../stores/sentences';
 import { Sentence as SentenceType } from 'common';
+import { transformSentence } from '../../../../../../common/medical-sentances'
 import StateTree from '../../../../stores/tree';
 import { Uploads } from '../../../../stores/uploads';
 import { User } from '../../../../stores/user';
@@ -546,20 +547,7 @@ class SpeakPage extends React.Component<Props, State> {
     });
   };
 
-  private transformSentence = (sentence: any) =>{
-    const text = sentence.text;
-    if (sentence.text.startsWith("{")){
-      console.log("Parsing text sentence: "+text)
-      const obj = JSON.parse(text);
-      const answers = obj['corr_answ'];
-      const questionText = obj['q_text'].replace("*","");
-      let allAnswersText = "";
-      answers.forEach( (a:String) => { allAnswersText = allAnswersText + a.trim() + ", ";})
-      allAnswersText = allAnswersText.substr(0, allAnswersText.length - 2);
-      return questionText + " " + allAnswersText;
-    }
-    return sentence.text;
-  };
+
 
   render() {
     const { getString, user } = this.props;
@@ -713,7 +701,7 @@ class SpeakPage extends React.Component<Props, State> {
                 ? null
                 : clips[recordingIndex].sentence.id,
           }}
-          sentences={clips.map(({ sentence }) => sentence && this.transformSentence(sentence))}
+          sentences={clips.map(({ sentence }) => sentence && transformSentence(sentence))}
           shortcuts={[
             {
               key: 'shortcut-record-toggle',

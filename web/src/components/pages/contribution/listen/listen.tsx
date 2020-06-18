@@ -8,6 +8,7 @@ import { Locale } from '../../../../stores/locale';
 import StateTree from '../../../../stores/tree';
 import API from '../../../../services/api';
 import URLS from '../../../../urls';
+import { transformSentence } from '../../../../../../common/medical-sentances'
 import {
   CheckIcon,
   CrossIcon,
@@ -351,7 +352,7 @@ class ListenPage extends React.Component<Props, State> {
             kind: 'clip',
             id: activeClip ? activeClip.id : null,
           }}
-          sentences={clips.map(clip => clip.sentence)}
+          sentences={clips.map(clip => transformSentence(clip.sentence))}
           shortcuts={[
             {
               key: 'shortcut-play-toggle',
