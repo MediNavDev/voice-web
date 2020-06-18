@@ -1,8 +1,7 @@
-export function transformSentence(sentence: any){
-    const text = sentence.text;
-    if (sentence.text.startsWith("{")){
-      console.log("Parsing text sentence: "+text)
-      const obj = JSON.parse(text);
+export function transformSentence(sentenceText: any){
+    if (sentenceText.startsWith("{")){
+      console.log("Parsing text sentence: "+sentenceText)
+      const obj = JSON.parse(sentenceText);
       const answers = obj['corr_answ'];
       const questionText = obj['q_text'].replace("*","");
       let allAnswersText = "";
@@ -10,5 +9,5 @@ export function transformSentence(sentence: any){
       allAnswersText = allAnswersText.substr(0, allAnswersText.length - 2);
       return questionText + " " + allAnswersText;
     }
-    return sentence.text;
+    return sentenceText;
   };
